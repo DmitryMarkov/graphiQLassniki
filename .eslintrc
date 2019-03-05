@@ -1,0 +1,20 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["react", "prettier", "prettier/react"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "rules": {}
+}
