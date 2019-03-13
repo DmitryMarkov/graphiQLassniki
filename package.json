@@ -23,9 +23,12 @@
   },
   "homepage": "https://github.com/DmitryMarkov/graphiQLassniki#readme",
   "dependencies": {
+    "apollo-server-express": "2.4.8",
     "compression": "1.7.3",
     "cors": "2.8.5",
     "express": "4.16.4",
+    "graphql": "14.1.1",
+    "graphql-tools": "4.0.4",
     "helmet": "3.16.0",
     "nodemon": "1.18.10",
     "react": "16.8.3",
