@@ -13,4 +13,8 @@ Install global packages:
 
 Run migrations:
 
-`sequelize db:migrate --migrations-path src/server/migrations --config src/server/config/index.js`
+`yarn run sequelize:migrate`
+
+Run seeders for mock data:
+
+`yarn run sequelize:seed`
