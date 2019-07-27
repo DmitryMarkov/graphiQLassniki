@@ -6,6 +6,8 @@ public/
 uploads/
 yarn.lock
 yarn-error.log
+.env*
+.gitignore
 .nyc_output/
 .prettierignore
 .vscode/

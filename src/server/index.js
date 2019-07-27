@@ -3,11 +3,14 @@ import express from 'express'
 import helmet from 'helmet'
 import cors from 'cors'
 import compression from 'compression'
+import db from './database'
 import services from './services'
 
 const root = path.join(__dirname, '../../')
 
 const app = express()
+
+console.log('NODE_ENV:', process.env.NODE_ENV)
 
 if (process.env.NODE_ENV === 'production') {
   app.use(helmet())
