@@ -35,6 +35,7 @@ app.use('/', express.static(path.join(root, 'dist/client')))
 app.use('/uploads', express.static(path.join(root, 'uploads')))
 
 const serviceNames = Object.keys(services)
+
 serviceNames.forEach(name => {
   if (name === 'graphql') {
     services[name].applyMiddleware({ app })
