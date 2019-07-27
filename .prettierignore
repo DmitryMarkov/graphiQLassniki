@@ -10,6 +10,7 @@ yarn-error.log
 .prettierignore
 .vscode/
 .yarncache/
+*.log
 *.md
 *.png
 *.snap
