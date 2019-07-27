@@ -3,11 +3,14 @@ build/
 dist/
 node_modules/
 public/
+uploads/
 yarn.lock
+yarn-error.log
 .nyc_output/
 .prettierignore
 .vscode/
 .yarncache/
+*.log
 *.md
 *.png
 *.snap
