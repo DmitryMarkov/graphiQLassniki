@@ -4,6 +4,7 @@ dist/
 node_modules/
 public/
 yarn.lock
+yarn-error.log
 .nyc_output/
 .prettierignore
 .vscode/
