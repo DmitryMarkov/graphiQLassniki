@@ -4,14 +4,15 @@
   "description": "GraphQL + React + Apollo playground",
   "main": "index.js",
   "scripts": {
-    "analyze": "webpack-bundle-analyzer stats.json",
     "client": "webpack-dev-server --devtool inline-sourse-map --hot --config webpack.client.config.js",
     "client:build": "webpack --config webpack.client.build.config.js",
+    "client:analyze": "webpack-bundle-analyzer stats.json",
+    "client:stats": "webpack --profile --json --config webpack.client.build.config.js > stats.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "sequelize:migrate": "dotenv -- sequelize db:migrate --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
+    "sequelize:undo": "dotenv -- sequelize db:migrate:undo --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:seed": "dotenv -- sequelize db:seed:all --seeders-path ./src/server/seeders --config ./src/server/config/index.js",
-    "server": "nodemon --exec dotenv babel-node --plugins require-context-hook --watch src/server src/server/index.js",
-    "stats": "webpack --profile --json --config webpack.client.build.config.js > stats.json"
+    "server": "nodemon --exec dotenv babel-node --plugins require-context-hook --watch src/server src/server/index.js"
   },
   "repository": {
     "type": "git",

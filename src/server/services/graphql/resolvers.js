@@ -7,6 +7,11 @@ export default function resolver() {
   const { Post } = db.models
 
   return {
+    Post: {
+      user(post) {
+        return post.getUser()
+      },
+    },
     RootQuery: {
       posts(root, args, context) {
         return Post.findAll({ order: [['createdAt', 'DESC']] })
