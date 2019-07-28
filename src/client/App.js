@@ -48,6 +48,8 @@ export default class App extends Component {
   render() {
     const { posts, postContent } = this.state
 
+    console.log('GRAPHQL_API:', process.env.GRAPHQL_API)
+
     return (
       <div className="container">
         <Helmet>
