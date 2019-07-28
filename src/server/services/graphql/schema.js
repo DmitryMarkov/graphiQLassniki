@@ -24,6 +24,15 @@ const typeDefinitions = `
     users: [User]
   }
   
+  input ChatInput {
+    users: [Int]
+  }
+  
+  input MessageInput {
+    text: String!
+    chatId: Int!
+  }
+  
   input PostInput {
     text: String!
   }
@@ -43,6 +52,12 @@ const typeDefinitions = `
     addPost (
       post: PostInput!
     ): Post
+    addChat (
+      chat: ChatInput!
+    ): Chat
+    addMessage (
+      message: MessageInput!
+    ): Message
   }
   
   schema {
