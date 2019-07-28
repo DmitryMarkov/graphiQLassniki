@@ -30,6 +30,19 @@ export default function resolver() {
       posts(root, args, context) {
         return Post.findAll({ order: [['createdAt', 'DESC']] })
       },
+      chat(root, { chatId }) {
+        return Chat.findByPk(chatId, {
+          include: [
+            {
+              model: User,
+              required: true,
+            },
+            {
+              model: Message,
+            },
+          ],
+        })
+      },
       chats() {
         return User.findAll().then(users => {
           if (!users.length) {
