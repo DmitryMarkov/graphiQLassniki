@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
+import { Mutation, Query } from 'react-apollo'
 
 const GET_POSTS = gql`
   {
@@ -15,6 +15,19 @@ const GET_POSTS = gql`
   }
 `
 
+const ADD_POST = gql`
+  mutation addPost($post: PostInput!) {
+    addPost(post: $post) {
+      id
+      text
+      user {
+        username
+        avatar
+      }
+    }
+  }
+`
+
 class Feed extends Component {
   state = {
     postContent: '',
@@ -22,20 +35,14 @@ class Feed extends Component {
   handlePostContentChange = event => {
     this.setState({ postContent: event.target.value })
   }
-  handleSubmit = event => {
+  handleSubmit = addPost => event => {
     event.preventDefault()
-    const newPost = {
-      id: this.state.posts.length + 1,
-      text: this.state.postContent,
-      user: {
-        avatar: '/uploads/avatar3.png',
-        username: 'Fake User',
-      },
-    }
-    this.setState(prevState => ({
-      posts: [newPost, ...prevState.posts],
-      postContent: '',
-    }))
+
+    addPost({ variables: { post: { text: this.state.postContent } } }).then(() => {
+      this.setState(prevState => ({
+        postContent: '',
+      }))
+    })
   }
 
   render() {
@@ -44,14 +51,18 @@ class Feed extends Component {
     return (
       <div className="container">
         <div className="postForm">
-          <form onSubmit={this.handleSubmit}>
-            <textarea
-              value={postContent}
-              onChange={this.handlePostContentChange}
-              placeholder="Write your custom post!"
-            />
-            <input type="submit" value="Submit" />
-          </form>
+          <Mutation mutation={ADD_POST}>
+            {addPost => (
+              <form onSubmit={this.handleSubmit(addPost)}>
+                <textarea
+                  value={postContent}
+                  onChange={this.handlePostContentChange}
+                  placeholder="Write your custom post!"
+                />
+                <input type="submit" value="Submit" />
+              </form>
+            )}
+          </Mutation>
         </div>
         <div className="feed">
           <Query query={GET_POSTS}>
