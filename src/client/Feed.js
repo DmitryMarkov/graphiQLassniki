@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import { Query } from 'react-apollo'
 
 const GET_POSTS = gql`
   {
@@ -39,16 +39,7 @@ class Feed extends Component {
   }
 
   render() {
-    const { posts, loading, error } = this.props
     const { postContent } = this.state
-
-    if (loading) {
-      return 'loading...'
-    }
-
-    if (error) {
-      return error.message
-    }
 
     return (
       <div className="container">
@@ -63,25 +54,33 @@ class Feed extends Component {
           </form>
         </div>
         <div className="feed">
-          {posts.map((post, i) => (
-            <div key={post.id} className="post">
-              <div className="header">
-                <img src={post.user.avatar} />
-                <h2>{post.user.username}</h2>
-              </div>
-              <p className="content">{post.text}</p>
-            </div>
-          ))}
+          <Query query={GET_POSTS}>
+            {({ data, error, loading }) => {
+              if (loading) {
+                return 'loading...'
+              }
+
+              if (error) {
+                return error.message
+              }
+
+              const { posts } = data
+
+              return posts.map((post, i) => (
+                <div key={post.id} className="post">
+                  <div className="header">
+                    <img src={post.user.avatar} alt="" />
+                    <h2>{post.user.username}</h2>
+                  </div>
+                  <p className="content">{post.text}</p>
+                </div>
+              ))
+            }}
+          </Query>
         </div>
       </div>
     )
   }
 }
 
-export default graphql(GET_POSTS, {
-  props: ({ data: { loading, error, posts } }) => ({
-    loading,
-    error,
-    posts,
-  }),
-})(Feed)
+export default Feed
