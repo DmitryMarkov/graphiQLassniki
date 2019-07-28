@@ -12,7 +12,7 @@
     "sequelize:migrate": "dotenv -- sequelize db:migrate --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:undo": "dotenv -- sequelize db:migrate:undo --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:seed": "dotenv -- sequelize db:seed:all --seeders-path ./src/server/seeders --config ./src/server/config/index.js",
-    "server": "nodemon --exec dotenv babel-node --plugins require-context-hook --watch src/server src/server/index.js"
+    "server": "nodemon --exec dotenv babel-node --watch src/server src/server/index.js"
   },
   "repository": {
     "type": "git",
