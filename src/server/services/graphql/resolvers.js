@@ -1,12 +1,26 @@
 import logger from '../../helpers/logger'
 
-let posts = []
-
 export default function resolver() {
   const { db } = this
-  const { Post, User } = db.models
+  const { Chat, Message, Post, User } = db.models
 
   return {
+    Message: {
+      user(message) {
+        return message.getUser()
+      },
+      chat(message) {
+        return message.getChat()
+      },
+    },
+    Chat: {
+      messages(chat) {
+        return chat.getMessages({ order: [['id', 'ASC']] })
+      },
+      users(chat) {
+        return chat.getUsers()
+      },
+    },
     Post: {
       user(post) {
         return post.getUser()
@@ -15,6 +29,30 @@ export default function resolver() {
     RootQuery: {
       posts(root, args, context) {
         return Post.findAll({ order: [['createdAt', 'DESC']] })
+      },
+      chats() {
+        return User.findAll().then(users => {
+          if (!users.length) {
+            return []
+          }
+
+          const usersRow = users[0]
+
+          return Chat.findAll({
+            include: [
+              {
+                model: User,
+                required: true,
+                through: {
+                  where: { userId: usersRow.id },
+                },
+              },
+              {
+                model: Message,
+              },
+            ],
+          })
+        })
       },
     },
     RootMutation: {
