@@ -51,7 +51,14 @@ class Feed extends Component {
     return (
       <div className="container">
         <div className="postForm">
-          <Mutation mutation={ADD_POST} refetchQueries={[{ query: GET_POSTS }]}>
+          <Mutation
+            mutation={ADD_POST}
+            update={(store, { data: { addPost } }) => {
+              const data = store.readQuery({ query: GET_POSTS })
+              data.posts.unshift(addPost)
+              store.writeQuery({ query: GET_POSTS, data })
+            }}
+          >
             {addPost => (
               <form onSubmit={this.handleSubmit(addPost)}>
                 <textarea
