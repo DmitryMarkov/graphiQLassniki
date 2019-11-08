@@ -14,7 +14,8 @@
     "sequelize:reset": "dotenv -- sequelize db:migrate:undo:all --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:seed": "dotenv -- sequelize db:seed:all --seeders-path ./src/server/seeders --config ./src/server/config/index.js",
     "server": "nodemon --exec dotenv babel-node --watch src/server src/server/index.js",
-    "upgrade-dependencies": "yarn upgrade-interactive --latest --exact"
+    "upgrade-dependencies": "yarn upgrade-interactive --latest --exact",
+    "watch": "run-p client server"
   },
   "repository": {
     "type": "git",
@@ -82,6 +83,7 @@
     "file-loader": "4.1.0",
     "html-webpack-plugin": "3.2.0",
     "mini-css-extract-plugin": "0.8.0",
+    "npm-run-all": "4.1.5",
     "prettier": "1.18.2",
     "style-loader": "0.23.1",
     "url-loader": "2.1.0",
