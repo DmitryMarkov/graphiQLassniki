@@ -8,12 +8,13 @@
     "client:build": "webpack --config webpack.client.build.config.js",
     "client:analyze": "webpack-bundle-analyzer stats.json",
     "client:stats": "webpack --profile --json --config webpack.client.build.config.js > stats.json",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "yarn client:build && yarn server",
     "sequelize:migrate": "dotenv -- sequelize db:migrate --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:undo": "dotenv -- sequelize db:migrate:undo --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:reset": "dotenv -- sequelize db:migrate:undo:all --migrations-path ./src/server/migrations --config ./src/server/config/index.js",
     "sequelize:seed": "dotenv -- sequelize db:seed:all --seeders-path ./src/server/seeders --config ./src/server/config/index.js",
-    "server": "nodemon --exec dotenv babel-node --watch src/server src/server/index.js"
+    "server": "nodemon --exec dotenv babel-node --watch src/server src/server/index.js",
+    "upgrade-dependencies": "yarn upgrade-interactive --latest --exact"
   },
   "repository": {
     "type": "git",
@@ -50,7 +51,7 @@
     "react-apollo": "2.5.8",
     "react-dom": "16.8.6",
     "react-helmet": "5.2.1",
-    "sequelize": "5.11.0",
+    "sequelize": "5.15.1",
     "winston": "3.2.1"
   },
   "devDependencies": {
