@@ -49,7 +49,7 @@
     "graphql-tag": "2.10.3",
     "graphql-tools": "4.0.6",
     "helmet": "3.23.0",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "mysql2": "1.6.5",
     "nodemon": "2.0.4",
     "react": "16.13.1",
